@@ -15,3 +15,426 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Java Learning RPG - Complete CSS Styles */
+
+/* Base Styles */
+.rpg-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+  color: white;
+  padding: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.max-w-6xl {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Header Styles */
+.rpg-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(45deg, #60a5fa, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+.rpg-subtitle {
+  font-size: 1.25rem;
+  color: #d1d5db;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Card Styles */
+.rpg-card {
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid #475569;
+  backdrop-filter: blur(10px);
+}
+
+/* Player Stats Card */
+.player-stats {
+  text-align: center;
+}
+
+.player-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.player-level {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+}
+
+.total-xp {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.xp-bar {
+  background: #374151;
+  border-radius: 9999px;
+  height: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.xp-progress {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: width 0.5s ease-in-out;
+}
+
+.xp-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Activity Selector */
+.activity-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.activity-select {
+  width: 100%;
+  background: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 0.875rem;
+}
+
+.activity-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.activity-preview {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: rgba(55, 65, 81, 0.5);
+  border-radius: 0.5rem;
+}
+
+.activity-description {
+  font-size: 0.875rem;
+  color: #d1d5db;
+  margin-bottom: 0.25rem;
+}
+
+.activity-xp {
+  font-size: 0.75rem;
+  color: #60a5fa;
+}
+
+.complete-button {
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.complete-button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #1d4ed8, #6d28d9);
+  transform: translateY(-1px);
+}
+
+.complete-button:disabled {
+  background: linear-gradient(90deg, #4b5563, #4b5563);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Achievements */
+.achievements-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.trophy-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #fbbf24;
+}
+
+.achievements-list {
+  max-height: 10rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.achievements-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.achievements-list::-webkit-scrollbar-track {
+  background: #374151;
+  border-radius: 2px;
+}
+
+.achievements-list::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 2px;
+}
+
+.achievement-item {
+  background: rgba(217, 119, 6, 0.2);
+  border: 1px solid #d97706;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.achievement-name {
+  font-weight: 700;
+  color: #fbbf24;
+  font-size: 0.875rem;
+  margin-bottom: 0.125rem;
+}
+
+.achievement-desc {
+  font-size: 0.75rem;
+  color: #fcd34d;
+}
+
+.no-achievements {
+  color: #6b7280;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+/* Attributes Grid */
+.attributes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .attributes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .attributes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Attribute Cards */
+.attribute-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.attribute-icon {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attribute-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.attribute-info h3 {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.attribute-level {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.attribute-progress {
+  margin-bottom: 0.5rem;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.progress-bar {
+  background: #374151;
+  border-radius: 9999px;
+  height: 0.75rem;
+}
+
+.progress-fill {
+  height: 0.75rem;
+  border-radius: 9999px;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Attribute-specific colors */
+.java-core { background: #3b82f6; }
+.spring-boot { background: #10b981; }
+.database { background: #8b5cf6; }
+.architecture { background: #f59e0b; }
+.testing { background: #ef4444; }
+.deployment { background: #6366f1; }
+
+/* Level Up Animation */
+.level-up-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.level-up-card {
+  background: linear-gradient(90deg, #fbbf24, #f97316);
+  color: #000;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  animation: bounce 1s infinite;
+}
+
+.level-up-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.level-up-text {
+  font-size: 1.25rem;
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0,-4px,0);
+  }
+}
+
+/* Grid Layouts */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Responsive Text Sizing */
+@media (max-width: 640px) {
+  .rpg-title {
+    font-size: 2rem;
+  }
+  
+  .player-level {
+    font-size: 2rem;
+  }
+  
+  .level-up-title {
+    font-size: 2rem;
+  }
+  
+  .level-up-text {
+    font-size: 1rem;
+  }
+}
+
+/* Dark theme scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6b7280 #374151;
+}
+
+/* Focus states for accessibility */
+.complete-button:focus,
+.activity-select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Hover effects */
+.rpg-card:hover {
+  border-color: #64748b;
+  transition: border-color 0.2s ease;
+}
+
+.attribute-icon:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Success states */
+.success-flash {
+  animation: flash 0.5s ease-in-out;
+}
+
+@keyframes flash {
+  0% { background-color: rgba(16, 185, 129, 0.2); }
+  50% { background-color: rgba(16, 185, 129, 0.4); }
+  100% { background-color: transparent; }
+}

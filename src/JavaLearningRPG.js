@@ -450,140 +450,129 @@ const JavaLearningRPG = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white p-6">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-            Java Developer RPG
-          </h1>
-          <p className="text-xl text-gray-300">Level up your Java and Spring Boot skills!</p>
+  <div className="rpg-container">
+    <div className="max-w-6xl">
+      
+      {/* Header */}
+      <div>
+        <h1 className="rpg-title">Java Developer RPG</h1>
+        <p className="rpg-subtitle">Level up your Java and Spring Boot skills!</p>
+      </div>
+
+      {/* Player Stats, Activity Selector, Achievements */}
+      <div className="stats-grid">
+        <div className="rpg-card player-stats">
+          <div className="player-name">{playerData.name}</div>
+          <div className="player-level">Level {playerData.level}</div>
+          <div className="total-xp">Total XP: {playerData.totalXP}</div>
+          <div className="xp-bar">
+            <div
+              className="xp-progress"
+              style={{ width: `${(playerData.totalXP % 100)}%` }}
+            ></div>
+          </div>
+          <div className="xp-text">
+            {playerData.totalXP % 100}/100 XP to next level
+          </div>
         </div>
 
-        {/* Player Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <h2 className="text-2xl font-bold text-center mb-4">{playerData.name}</h2>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-yellow-400 mb-2">Level {playerData.level}</div>
-              <div className="text-sm text-gray-400">Total XP: {playerData.totalXP}</div>
-              <div className="mt-4 bg-slate-700 rounded-full h-2">
-                <div 
-                  className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500"
-                  style={{width: `${(playerData.totalXP % 100)}%`}}
+        <div className="rpg-card">
+          <div className="activity-title">Complete Activity</div>
+          <select
+            value={selectedActivity}
+            onChange={(e) => setSelectedActivity(e.target.value)}
+            className="activity-select"
+          >
+            <option value="">Select an activity...</option>
+            {Object.entries(activities).map(([key, activity]) => (
+              <option key={key} value={key}>
+                {activity.name} (+{activity.xp} XP)
+              </option>
+            ))}
+          </select>
+          {selectedActivity && (
+            <div className="activity-preview">
+              <div className="activity-description">
+                {activities[selectedActivity].description}
+              </div>
+              <div className="activity-xp">
+                +{activities[selectedActivity].xp} XP to {activities[selectedActivity].attribute}
+              </div>
+            </div>
+          )}
+          <button
+            onClick={awardXP}
+            disabled={!selectedActivity}
+            className="complete-button"
+          >
+            Complete Activity
+          </button>
+        </div>
+
+        <div className="rpg-card">
+          <div className="achievements-title">
+            <span className="trophy-icon"><Lucide.Trophy /></span>
+            Achievements
+          </div>
+          <div className="achievements-list">
+            {achievements.length === 0 ? (
+              <div className="no-achievements">No achievements yet</div>
+            ) : (
+              achievements.map(achId => {
+                const ach = achievementDefs.find(a => a.id === achId);
+                return (
+                  <div key={achId} className="achievement-item">
+                    <div className="achievement-name">{ach.name}</div>
+                    <div className="achievement-desc">{ach.description}</div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Attributes Grid */}
+      <div className="attributes-grid">
+        {Object.entries(playerData.attributes).map(([attrName, attr]) => (
+          <div key={attrName} className="rpg-card">
+            <div className="attribute-header">
+              <span className={`attribute-icon ${attrName.replace(/([A-Z])/g, '-$1').toLowerCase()}`}>
+                {getAttributeIcon(attrName)}
+              </span>
+              <div className="attribute-info">
+                <h3>{attrName.replace(/([A-Z])/g, ' $1').trim()}</h3>
+                <div className="attribute-level">Level {attr.level}</div>
+              </div>
+            </div>
+            <div className="attribute-progress">
+              <div className="progress-label">
+                <span>XP Progress</span>
+                <span>{attr.xp}/{attr.maxXP}</span>
+              </div>
+              <div className="progress-bar">
+                <div
+                  className={`progress-fill ${attrName.replace(/([A-Z])/g, '-$1').toLowerCase()}`}
+                  style={{ width: `${(attr.xp / attr.maxXP) * 100}%` }}
                 ></div>
               </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {playerData.totalXP % 100}/100 XP to next level
-              </div>
             </div>
           </div>
-
-          {/* Activity Selector */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <h3 className="text-xl font-bold mb-4 text-center">Complete Activity</h3>
-            <select 
-              value={selectedActivity}
-              onChange={(e) => setSelectedActivity(e.target.value)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg p-3 mb-4 text-white"
-            >
-              <option value="">Select an activity...</option>
-              {Object.entries(activities).map(([key, activity]) => (
-                <option key={key} value={key}>
-                  {activity.name} (+{activity.xp} XP)
-                </option>
-              ))}
-            </select>
-            
-            {selectedActivity && (
-              <div className="mb-4 p-3 bg-slate-700/50 rounded-lg">
-                <div className="text-sm text-gray-300">
-                  {activities[selectedActivity].description}
-                </div>
-                <div className="text-xs text-blue-400 mt-1">
-                  +{activities[selectedActivity].xp} XP to {activities[selectedActivity].attribute}
-                </div>
-              </div>
-            )}
-            
-            <button 
-              onClick={awardXP}
-              disabled={!selectedActivity}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 disabled:cursor-not-allowed"
-            >
-              Complete Activity
-            </button>
-          </div>
-
-          {/* Achievements */}
-          <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <h3 className="text-xl font-bold mb-4 text-center flex items-center justify-center gap-2">
-              <Lucide.Trophy className="w-5 h-5 text-yellow-400" />
-              Achievements
-            </h3>
-            <div className="space-y-2 max-h-40 overflow-y-auto">
-              {achievements.length === 0 ? (
-                <p className="text-gray-500 text-center text-sm">No achievements yet</p>
-              ) : (
-                achievements.map(achId => {
-                  const ach = achievementDefs.find(a => a.id === achId);
-                  return (
-                    <div key={achId} className="bg-yellow-900/30 border border-yellow-700 rounded-lg p-2">
-                      <div className="font-bold text-yellow-400 text-sm">{ach.name}</div>
-                      <div className="text-xs text-yellow-300">{ach.description}</div>
-                    </div>
-                  );
-                })
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Attributes Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {Object.entries(playerData.attributes).map(([attrName, attr]) => (
-            <div key={attrName} className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`p-2 rounded-lg ${getAttributeColor(attrName)}`}>
-                  {getAttributeIcon(attrName)}
-                </div>
-                <div>
-                  <h3 className="font-bold capitalize text-lg">
-                    {attrName.replace(/([A-Z])/g, ' $1').trim()}
-                  </h3>
-                  <div className="text-sm text-gray-400">Level {attr.level}</div>
-                </div>
-              </div>
-              
-              <div className="mb-2">
-                <div className="flex justify-between text-sm mb-1">
-                  <span>XP Progress</span>
-                  <span>{attr.xp}/{attr.maxXP}</span>
-                </div>
-                <div className="bg-slate-700 rounded-full h-3">
-                  <div 
-                    className={`h-3 rounded-full transition-all duration-500 ${getAttributeColor(attrName)}`}
-                    style={{width: `${(attr.xp / attr.maxXP) * 100}%`}}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Level Up Animation */}
-        {showLevelUp && (
-          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black p-8 rounded-xl text-center transform animate-bounce">
-              <h2 className="text-4xl font-bold mb-2">LEVEL UP!</h2>
-              <p className="text-xl">You reached Level {playerData.level}!</p>
-            </div>
-          </div>
-        )}
+        ))}
       </div>
+
+      {/* Level Up Animation */}
+      {showLevelUp && (
+        <div className="level-up-overlay">
+          <div className="level-up-card">
+            <div className="level-up-title">LEVEL UP!</div>
+            <div className="level-up-text">You reached Level {playerData.level}!</div>
+          </div>
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
 };
 
 export default JavaLearningRPG;
